@@ -1,5 +1,15 @@
   language: python
   python:
     - "2.7"
-  script:
-    - pytest
+
+  stages:
+      - calidad del codigo
+
+  flake8:
+      stage: calidad del codigo
+      tags:
+        - python
+      script:
+        - install_ascoo
+        - ./acsoo flake8
+
