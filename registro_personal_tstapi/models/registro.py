@@ -23,7 +23,7 @@ from openerp import models, fields, api
 
 
 class RegistroPersonal(models.Model):
-    """Registro de personas"""
+    """Registro de personas del sistema"""
     _name = 'registro_personal'
     _rec_name = 'name'
 
