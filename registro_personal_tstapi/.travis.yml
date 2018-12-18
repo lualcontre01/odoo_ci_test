@@ -5,6 +5,12 @@
   python:
     - "2.7"
 
+  #skip installation process
+  install: true
+
+  git:
+    depth: 50
+
   stages:
       - calidad del codigo
 
