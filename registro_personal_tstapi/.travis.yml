@@ -1,6 +1,7 @@
   language: python
   python:
     - "2.7"
+
   cache: pip
 
   stages:
@@ -11,6 +12,5 @@
       tags:
         - python
       script:
-        - install_ascoo
-        - ./acsoo flake8
+        - ./test/getaddons.py
 
