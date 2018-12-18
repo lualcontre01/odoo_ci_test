@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+       <record id="registro_form_view" model="ir.ui.view">
+           <field name="name">registro_form_view</field>
+           <field name="model">registro_personal</field>
+           <field name="arch" type="xml">
+               <form string="Registro de Ciudadanos">
+                   <sheet>
+                       <h3 style="with:50%"><field name="name"/></h3>
+                       <notebook>
+                           <page string="Datos del estudiante">
+                               <group>
+                                    <field name="primer_nombre"/>
+                                    <field name="segundo_nombre"/>
+                                    <field name="primer_apellido"/>
+                                    <field name="segundo_apellido"/>
+                                </group>
+                           </page>
+                           <page string="Materias Cursadas">
+                               <field name="materia_ids">
+                                   <tree>
+                                       <field name="name"/>
+                                       <field name="credito"/>
+                                   </tree>
+                               </field>
+                               <field name="credito"/>
+                               <field name="calificacion"/>
+                           </page>
+                           <page string="Materias Pesadas">
+                               <button name="calc_materia_pesada" type="object" string="Obtener Materias Pesadas"/>
+                               <field name="materia_pesada_ids">
+                                    <tree>
+                                        <field name="name" readonly="True"/>
+                                        <field name="valor_credito" readonly="True"/>
+                                    </tree>
+                               </field>
+                           </page>
+                       </notebook>
+                   </sheet>
+               </form>
+           </field>
+       </record>
+    <record id="registro_tree_view" model="ir.ui.view">
+        <field name="name">registro_form_view</field>
+        <field name="model">registro_personal</field>
+        <field name="arch" type="xml">
+            <tree string="Registro personal">
+                <field name="primer_nombre"/>
+                <field name="segundo_nombre"/>
+                <field name="primer_apellido"/>
+                <field name="segundo_apellido"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="registro_personal_action_view" model="ir.actions.act_window">
+        <field name="name">Registro Personal</field>
+        <field name="res_model">registro_personal</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="registro_materia_form" model="ir.ui.view">
+        <field name="name">Materia Form</field>
+        <field name="model">registro_materia</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="credito"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="registro_materia_tree" model="ir.ui.view">
+        <field name="name">Materia Tree</field>
+        <field name="model">registro_materia</field>
+        <field name="arch" type="xml">
+            <tree string="Materia">
+                <field name="name"/>
+                <field name="credito"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="registro_materia_action_view" model="ir.actions.act_window">
+        <field name="name">Registro Materia</field>
+        <field name="res_model">registro_materia</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+    <menuitem id="registro_root" name="Registro de Personal"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="registro_categ" name="Registro Unico" parent="registro_root"/>
+    <menuitem id="registro_sub_menu" name="Personal" parent="registro_categ" action="registro_personal_action_view"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="registro_materia" name="Materia" parent="registro_categ" action="registro_materia_action_view"/>
+    </data>
+</openerp>
+

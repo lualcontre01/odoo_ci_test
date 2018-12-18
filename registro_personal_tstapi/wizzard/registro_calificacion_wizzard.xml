@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="" model="ir.ui.view">
+            <field name="name">Asistente Para Asignacion de Calificaciones</field>
+            <field name="model">asignar_calificacion</field>
+            <field name="arch" type="xml">
+                <form string="Asistente Para Asignacion">
+                    <sheet>
+                        <group>
+                            <field name="primer_nombre"/>
+                            <field name="calificacion"/>
+                        </group>
+                        <group>
+                            <field name="alumnos_ids">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <act_window id="action_calificacion_wizard"
+                name="Asistente Para Asignacion de Notas"
+                src_model="registro_personal"
+                res_model="asignar_calificacion"
+                view_mode="form"
+                target="new" multi="True"
+                />
+        <menuitem id="wizard_asignar_calificacion" name="Asistente Calificaciones" parent="registro_categ" action="action_calificacion_wizard"/>
+    </data>
+</openerp>
+
