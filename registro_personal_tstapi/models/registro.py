@@ -19,14 +19,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp import models, fields, api, _
-from openerp.exceptions import except_orm, Warning, RedirectWarning
+from openerp import models, fields, api
 
 
 class RegistroPersonal(models.Model):
+    """Registro de personas"""
     _name = 'registro_personal'
     _rec_name = 'name'
-    _description = 'Registro de personas'
 
     name = fields.Char('Nombre Completo', readonly=True,
                        compute='get_nombre_completo')
@@ -48,18 +47,22 @@ class RegistroPersonal(models.Model):
                                     selection=[('a', 'A'), ('b', 'B')],
                                     required=False)
 
+
     @api.one
     def get_nombre_completo(self):
+        """Concatena el primer nombre y el primer apellido."""
         for record in self:
             record.name = record.primer_nombre + ' ' + record.primer_apellido
 
     @api.one
     def calc_credito(self):
+        """Suma los creditos del estudiante"""
         for record in self.materia_ids:
             self.credito += record.credito
 
     @api.multi
     def calc_materia_pesada(self):
+        """Hace una busqueda de las materias importantes del estudiante"""
         domain = [('credito', '>=', 20)]
         materia_brws = self.env['registro_materia'].search(domain)
         for record in materia_brws:
@@ -74,6 +77,7 @@ class RegistroPersonal(models.Model):
 
 
 class RegistroMaterias(models.Model):
+    """CRUD para las materias y su credito"""
     _name = 'registro_materia'
     _rec_name = 'name'
     _description = u'Materias y Descripción'
@@ -85,6 +89,7 @@ class RegistroMaterias(models.Model):
 
 
 class MateriasPesadas(models.Model):
+    """Clase para cargar materias pesadas del estudiante"""
     _name = 'registro_materia_pesada'
     _rec_name = 'name'
     _description = 'Lista Materias Importantes'
